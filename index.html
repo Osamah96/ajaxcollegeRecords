@@ -1,0 +1,136 @@
+<html>
+<head>
+    <title>College Record by Osamah </title>
+  
+   
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="jquery.js"></script>
+    <script src= "js/bootstrap.js"></script>
+
+    <!-- Creating ajax request -->
+
+    <script>
+          function ajax_request (create_new_student){
+            //   alert('workin fine');
+            
+             var student_name =document.getElementById('student-name').value;
+             var student_subject=document.getElementById('student-subject').value;
+             var student_fees=document.getElementById('student-fees').value;
+
+             if(create_new_student == undefined){
+                create_new_student='';
+             }
+
+             if(student_name ==''){
+                student_name='';
+             }
+                    if(student_subject ==''){
+                 student_subject='';
+             }
+              
+
+             if(student_fees ==''){
+                 student_fees='';
+             }
+
+          
+              var xmlhttp= new XMLHttpRequest();
+              xmlhttp.onreadystatechange = function (){
+                  if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                    var test_div = document.getElementById('test');
+                    test_div.innerHTML=xmlhttp.responseText;
+
+                  }
+              }
+              xmlhttp.open('GET','data.php?add_req='+create_new_student+'&stu_name='+student_name+
+              '&stu_subject='+student_subject+'&stu_fee='+student_fees,true);
+              xmlhttp.send();
+          }
+
+    </script>
+
+
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
+
+
+
+    <style>
+        .btn,.form-control{
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body onload="ajax_request ();">
+  <div class="container">
+
+    <div class="jumbotron">
+
+        <h1>College Record</h1>
+ 
+    </div>
+    
+ 
+   
+  <div class = "form-horizontal">
+      <!-- name -->
+    <div class="form-group">
+          <label class="control-label col-md-2">Student name</label>
+          <div class="col-md-8">
+              <input  type="text" id="student-name" class="form-control">
+          </div>
+      </div>
+
+      <!-- Subject -->
+    <div class="form-group">
+        <label  class="control-label col-md-2" >Student Subject</label>
+        <div class="col-md-8">
+           <select id="student-subject" class="form-control">
+               <option value="">Select any one</option>
+               <option value="Programming">Programing</option>
+               <option value="Networking">Networking</option>
+               <option value="Android">Android</option>
+               <option value="Web">Web</option>
+               </select>
+        </div>
+    </div>
+
+      <!-- Fees -->
+    <div class="form-group">
+        <label  class="control-label col-md-2" >Student Fees</label>
+        <div class="col-md-8" >
+          
+            <input type="number" id="student-fees" class="form-control">
+        </div>
+    </div>
+     
+     <!-- button add -->
+    <div class="form-group">
+        <div class="col-md-8 col-md-offset-2" >
+            <button class="btn btn-danger btn-block" onclick="ajax_request('create_new_student');"> Add new Record</button>
+        </div>
+    </div>
+  </div>
+   
+
+    <!-- The Table -->
+    <table class="table">
+        <thead >
+            <tr class="success">
+                <th>S.no</th>
+                <th>Student Name</th>
+                <th>Student Subject</th>
+                <th>Student Fees</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="test" >
+            
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
