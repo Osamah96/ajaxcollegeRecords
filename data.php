@@ -3,7 +3,7 @@
     include 'db.php';
 
     //receiving ajax insert request 
-    if($_REQUEST['add_req'] !=''){
+    if($_REQUEST['req'] !=''){
         $student_name=$_REQUEST['stu_name'];
         $student_subject=$_REQUEST['stu_subject'];
         $student_fee=$_REQUEST['stu_fee'];
@@ -13,10 +13,7 @@
         $ins_sql="INSERT INTO  students_data (student_name,student_subject,student_fees)
          values('$student_name','$student_subject',$student_fee)";
         $run_sql=mysqli_query($conn, $ins_sql);
-        
-        $student_name='';
-        $student_subject='';
-        $student_fee='';
+      
 
     }
     $sql= "select * from students_data";
