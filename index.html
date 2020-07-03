@@ -10,7 +10,7 @@
     <!-- Creating ajax request -->
 
     <script>
-          function ajax_request (req){
+          function ajax_request (req ,id){
             //   alert('workin fine');
             
              var student_name =document.getElementById('student-name').value;
@@ -19,6 +19,10 @@
 
              if(req == undefined){
                 req='';
+                id='';
+             }
+             else if(req=='create_new_student'){
+                 id='';
              }
 
              if(student_name ==''){
@@ -40,12 +44,30 @@
                     var test_div = document.getElementById('test');
                     test_div.innerHTML=xmlhttp.responseText;
 
-                  }
+                  }n
               }
-              xmlhttp.open('GET','data.php?req='+req+'&stu_name='+student_name+
+              xmlhttp.open('GET','data.php?req='+req+'&id='+id+'&stu_name='+student_name+
               '&stu_subject='+student_subject+'&stu_fee='+student_fees,true);
               xmlhttp.send();
           }
+        //   End of ajax_request
+
+        // Adding Ajax edit request
+
+         function edit_request( edit_id){
+
+            var xmlhttp =new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function (){
+               if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                   var form_data =document.getElementById('form-data');
+                   form_data.innerHTML =xmlhttp.responseText;
+               }
+            }
+            xmlhttp.open('GET','edit.php?edit_id='+edit_id,true);
+            xmlhttp.send();
+            }
+            //end of edit request
+         
 
     </script>
 
@@ -73,7 +95,7 @@
     
  
    
-  <div class = "form-horizontal">
+  <div class = "form-horizontal" id="form-data">
       <!-- name -->
     <div class="form-group">
           <label class="control-label col-md-2">Student name</label>
